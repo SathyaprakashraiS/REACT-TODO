@@ -1,10 +1,11 @@
 import { Formik } from 'formik';
 import React, {useEffect,useReducer,useState} from 'react';
-import { TextInput,Image,StyleSheet, Text, View,Alert,Button } from 'react-native';
+import { TextInput,Image,StyleSheet, Text, View,Alert,Button,ScrollView } from 'react-native';
 
 export default function ReviewForm() {
   return (
     <View style={styles.container}>
+      <ScrollView style={{flex:1}}>
         <Formik
         initialValues={{name:'',status:''}}
         onSubmit={(values) => {
@@ -28,6 +29,7 @@ export default function ReviewForm() {
                 </View>
             )}
         </Formik>
+        </ScrollView>
     </View>
   );
 }

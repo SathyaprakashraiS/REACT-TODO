@@ -128,9 +128,21 @@ const Stack=createNativeStackNavigator()
 
   return ( 
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="forms" component={ReviewForm} />
+      <Stack.Navigator
+        screenOptions={{
+          stackAnimation:"fade",
+          //stackPresentation:"modal",
+        }}
+      >
+        <Stack.Screen 
+        //options={{headerCenter: () => <Text>HomE</Text> }}
+        options={{headerLargeTitle:true }}
+        name="Home" component={Home} 
+        />
+        <Stack.Screen 
+        options={{headerLargeTitle:true }}
+        name="forms" component={ReviewForm}
+        />
       </Stack.Navigator>
     </NavigationContainer>
     /*
