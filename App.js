@@ -5,22 +5,14 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
-import ReviewForm from './pages/forms.js';
-/*class Appp extends React.Component
-{
-  constructor()
-  {
-    super();
-    this.state=
-    {
-      name:'',
-    }
-  }
-  submit()
-  {
-    console.log("HELLO ",this.state)
-  }
-}*/
+import ReviewForm from './pages/forms';
+import Home from './pages/homescreen';
+//import Navigator from './routes/homestack';
+
+import {enableScreens} from "react-native-screens";
+enableScreens();
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "react-native-screens/native-stack";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDWc6Dr8fAnJ_DLO318Pg1C2QPTsydZWFg",
@@ -132,31 +124,41 @@ const ref = storageRef.child('images');
 const snapshot = await ref.put(file);*/
 }
 
-  return (
+const Stack=createNativeStackNavigator()
+
+  return ( 
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="forms" component={ReviewForm} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    /*
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>test46</Text>
-      {name.map((item, index) => {
-          return (
-            <View key={index}>
-              <Text style={styles.itemtext}>{item.name}</Text>
-              <Text>{item.id}</Text>
-            </View>
-          );
-        })}
-      <StatusBar style="auto" />
-      <Button title="Choose pic" onPress={ this.onChooseImagePress } />
-      <TextInput 
-      style={styles.input}
-      placeholder='new username'
-      onChangeText={(value) => {setvalue(value) }}
-      />
-      <Button title="click here" onPress={() => {
-        createfun(value)
-      }}/>
-      <Text>{value}</Text>
-      <ReviewForm />
-    </View>
+    <Text>test46</Text>
+    {name.map((item, index) => {
+        return (
+          <View key={index}>
+            <Text style={styles.itemtext}>{item.name}</Text>
+            <Text>{item.id}</Text>
+          </View>
+        );
+      })}
+    <StatusBar style="auto" />
+    <Button title="Choose pic" onPress={ this.onChooseImagePress } />
+    <TextInput 
+    style={styles.input}
+    placeholder='new username'
+    onChangeText={(value) => {setvalue(value) }}
+    />
+    <Button title="click here" onPress={() => {
+      createfun(value)
+    }}/>
+    <Text>{value}</Text>
+    <ReviewForm />
+  </View>
+  */
   );
 }
 
