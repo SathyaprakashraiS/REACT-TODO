@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect,useReducer,useState} from 'react';
-import { TextInput,Image,StyleSheet, Text, View,Alert,Button } from 'react-native';
+import { TextInput,Image,StyleSheet, Text, View,Alert,Button,Easing } from 'react-native';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/storage';
@@ -13,7 +13,7 @@ import {enableScreens} from "react-native-screens";
 enableScreens();
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
-
+import { createStackNavigator, TransitionPresets, CardStyleInterpolators} from '@react-navigation/stack';
 var firebaseConfig = {
   apiKey: "AIzaSyDWc6Dr8fAnJ_DLO318Pg1C2QPTsydZWFg",
   authDomain: "to-do-ef53f.firebaseapp.com",
@@ -124,13 +124,39 @@ const ref = storageRef.child('images');
 const snapshot = await ref.put(file);*/
 }
 
-const Stack=createNativeStackNavigator()
+//const Stack=createNativeStackNavigator()
+const Stack= createStackNavigator();
+const config ={
+  animation:'spring',
+  config:{
+    stiffness:1000,
+    damping:50,
+    mass:3,
+    overshootClamping:false,
+    restDisplacementThreshold:0.01,
+    restSpeedThreshold:0.01,
+
+  },
+};
 
   return ( 
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          stackAnimation:"fade",
+          gestureEnabled:true,
+          
+          cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS,
+          transitionSpec:{
+            open:config,
+            close:config,
+          },
+          /*gestureDirection:"horizontal",
+          transitionSpec:{
+            open:config,
+            close:config,
+          },*/
+
+          //stackAnimation:"fade",
           //stackPresentation:"modal",
         }}
       >
